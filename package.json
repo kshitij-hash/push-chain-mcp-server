@@ -1,0 +1,43 @@
+{
+  "name": "push-chain-mcp",
+  "version": "1.0.0",
+  "description": "MCP server providing access to Push Chain documentation and SDK with auto-update capabilities",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "start:sdk": "node index-sdk.js",
+    "update:sdk": "node sdk-updater.js",
+    "update:sdk:force": "node sdk-updater.js --force",
+    "analyze:sdk": "node scripts/analyze-sdk.js",
+    "test": "node scripts/test-connection.js"
+  },
+  "keywords": [
+    "mcp",
+    "push-chain",
+    "documentation",
+    "blockchain",
+    "sdk",
+    "model-context-protocol",
+    "ai",
+    "llm"
+  ],
+  "author": "Push Chain",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pushchain/push-chain-mcp-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/pushchain/push-chain-mcp-server/issues"
+  },
+  "homepage": "https://github.com/pushchain/push-chain-mcp-server#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "dotenv": "^17.2.3",
+    "node-fetch": "^3.3.2",
+    "zod": "^3.23.8"
+  }
+}
