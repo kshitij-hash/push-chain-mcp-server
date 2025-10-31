@@ -97,7 +97,8 @@ const coreAndUIKitExports = {
   functions: exportsData.functions.filter(e => filterByPackage(e.file)),
   classes: exportsData.classes.filter(e => filterByPackage(e.file)),
   types: exportsData.types.filter(e => filterByPackage(e.file)),
-  interfaces: exportsData.interfaces.filter(e => filterByPackage(e.file))
+  interfaces: exportsData.interfaces.filter(e => filterByPackage(e.file)),
+  constants: exportsData.constants.filter(e => filterByPackage(e.file))
 };
 
 const coreAndUIKitPackages = packagesData.packages.filter(p =>
@@ -110,6 +111,7 @@ console.error(`  - ${coreAndUIKitExports.functions.length} functions`);
 console.error(`  - ${coreAndUIKitExports.classes.length} classes`);
 console.error(`  - ${coreAndUIKitExports.types.length} types`);
 console.error(`  - ${coreAndUIKitExports.interfaces.length} interfaces`);
+console.error(`  - ${coreAndUIKitExports.constants.length} constants`);
 console.error(`  - CHARACTER_LIMIT: ${CHARACTER_LIMIT}\n`);
 
 /**
@@ -789,7 +791,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             functions: coreAndUIKitExports.functions.filter(e => e.file.includes(`packages/${params.package}/`)),
             classes: coreAndUIKitExports.classes.filter(e => e.file.includes(`packages/${params.package}/`)),
             types: coreAndUIKitExports.types.filter(e => e.file.includes(`packages/${params.package}/`)),
-            interfaces: coreAndUIKitExports.interfaces.filter(e => e.file.includes(`packages/${params.package}/`))
+            interfaces: coreAndUIKitExports.interfaces.filter(e => e.file.includes(`packages/${params.package}/`)),
+            constants: coreAndUIKitExports.constants.filter(e => e.file.includes(`packages/${params.package}/`))
           };
 
           const info = {
@@ -799,13 +802,15 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
               functions: packageExports.functions.length,
               classes: packageExports.classes.length,
               types: packageExports.types.length,
-              interfaces: packageExports.interfaces.length
+              interfaces: packageExports.interfaces.length,
+              constants: packageExports.constants.length
             },
             topExports: {
               functions: packageExports.functions.slice(0, 10).map(e => e.name),
               classes: packageExports.classes.slice(0, 10).map(e => e.name),
               types: packageExports.types.slice(0, 10).map(e => e.name),
-              interfaces: packageExports.interfaces.slice(0, 10).map(e => e.name)
+              interfaces: packageExports.interfaces.slice(0, 10).map(e => e.name),
+              constants: packageExports.constants.slice(0, 10).map(e => e.name)
             }
           };
 
