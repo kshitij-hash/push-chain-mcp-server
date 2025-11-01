@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "push-chain-unified": {
+      "command": "node",
+      "args": ["/Users/kshitijhash/dev/push_chain_mcp/mcp-servers/index-unified.js"],
+      "env": {
+        "GITHUB_TOKEN": "${GITHUB_TOKEN}"
+      }
+    }
+  }
+}

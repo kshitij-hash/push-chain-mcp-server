@@ -5,6 +5,29 @@
 import { CHARACTER_LIMIT } from "./constants.js";
 
 /**
+ * Sanitizes user input to prevent injection attacks
+ * Escapes special characters that could be used maliciously
+ *
+ * @param {string} input - User input to sanitize
+ * @returns {string} Sanitized input
+ */
+export function sanitizeInput(input) {
+  if (typeof input !== 'string') return String(input);
+
+  return input
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#x27;')
+    .replace(/\//g, '&#x2F;')
+    // Remove null bytes
+    .replace(/\0/g, '')
+    // Limit consecutive special characters
+    .replace(/([^\w\s])\1{3,}/g, '$1$1$1');
+}
+
+/**
  * Formats response data based on the requested format (JSON or Markdown)
  *
  * @param {any} data - The data to format
@@ -95,4 +118,31 @@ export function formatPaginationMetadata(total, offset, limit) {
     has_more: hasMore,
     ...(hasMore ? { next_offset: offset + limit } : {})
   };
+}
+
+/**
+ * Formats pagination text for markdown responses
+ *
+ * @param {number} total - Total number of items available
+ * @param {number} offset - Current offset
+ * @param {number} limit - Items per page
+ * @param {number} showing - Actual items shown
+ * @returns {string} Formatted pagination text
+ */
+export function formatPaginationText(total, offset = 0, limit = 20, showing = null) {
+  const actualShowing = showing !== null ? showing : Math.min(limit, total - offset);
+  const start = offset + 1;
+  const end = offset + actualShowing;
+  const hasMore = end < total;
+
+  let text = `\n\n---\n📊 **Pagination**\n`;
+  text += `Showing ${actualShowing} results (${start}-${end} of ${total} total)\n`;
+
+  if (hasMore) {
+    text += `\n💡 To see more results, use:\n`;
+    text += `- \`limit\`: Number of results per page (currently: ${limit})\n`;
+    text += `- \`offset\`: Skip first N results (currently: ${offset}, next: ${offset + limit})\n`;
+  }
+
+  return text;
 }

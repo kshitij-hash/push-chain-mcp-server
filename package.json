@@ -3,14 +3,17 @@
   "version": "1.0.0",
   "description": "MCP server providing access to Push Chain documentation and SDK with auto-update capabilities",
   "type": "module",
-  "main": "index.js",
+  "main": "index-unified.js",
   "scripts": {
-    "start": "node index.js",
-    "start:sdk": "node index-sdk.js",
+    "start": "node index-unified.js",
+    "test": "node scripts/test-unified-server.js",
+    "test:compliance": "node scripts/test-mcp-compliance.js",
+    "test:stress": "node scripts/stress-test.js",
+    "test:all": "npm run test && npm run test:compliance",
     "update:sdk": "node sdk-updater.js",
     "update:sdk:force": "node sdk-updater.js --force",
-    "analyze:sdk": "node scripts/analyze-sdk.js",
-    "test": "node scripts/test-connection.js"
+    "update:docs": "node generate-docs-data.js",
+    "analyze:sdk": "node scripts/analyze-sdk.js"
   },
   "keywords": [
     "mcp",
@@ -38,6 +41,7 @@
     "@modelcontextprotocol/sdk": "^1.0.4",
     "dotenv": "^17.2.3",
     "node-fetch": "^3.3.2",
-    "zod": "^3.23.8"
+    "zod": "^3.23.8",
+    "zod-to-json-schema": "^3.24.6"
   }
 }

@@ -263,22 +263,22 @@ async function main() {
   console.error('='.repeat(60));
 
   // 1. sdk_file_contents.json
-  console.error('Writing sdk_file_contents.json...');
-  writeFileSync('sdk_file_contents.json', JSON.stringify(fileContents, null, 2));
+  console.error('Writing data/sdk_file_contents.json...');
+  writeFileSync('data/sdk_file_contents.json', JSON.stringify(fileContents, null, 2));
   console.error(`  ✓ Written (${Object.keys(fileContents).length} files)`);
 
   // 2. sdk_complete_exports.json
-  console.error('Writing sdk_complete_exports.json...');
-  writeFileSync('sdk_complete_exports.json', JSON.stringify(allExports, null, 2));
+  console.error('Writing data/sdk_complete_exports.json...');
+  writeFileSync('data/sdk_complete_exports.json', JSON.stringify(allExports, null, 2));
   console.error(`  ✓ Written (${allExports.functions.length + allExports.classes.length + allExports.types.length + allExports.interfaces.length} exports)`);
 
   // 3. sdk_packages_complete.json
-  console.error('Writing sdk_packages_complete.json...');
-  writeFileSync('sdk_packages_complete.json', JSON.stringify({ packages }, null, 2));
+  console.error('Writing data/sdk_packages_complete.json...');
+  writeFileSync('data/sdk_packages_complete.json', JSON.stringify({ packages }, null, 2));
   console.error(`  ✓ Written (${packages.length} packages)`);
 
   // 4. sdk_complete_analysis.json
-  console.error('Writing sdk_complete_analysis.json...');
+  console.error('Writing data/sdk_complete_analysis.json...');
   const analysis = {
     metadata: {
       repository: `${REPO_OWNER}/${REPO_NAME}`,
@@ -296,7 +296,7 @@ async function main() {
       totalConstants: allExports.constants.length
     }
   };
-  writeFileSync('sdk_complete_analysis.json', JSON.stringify(analysis, null, 2));
+  writeFileSync('data/sdk_complete_analysis.json', JSON.stringify(analysis, null, 2));
   console.error(`  ✓ Written`);
 
   console.error('\n' + '='.repeat(60));

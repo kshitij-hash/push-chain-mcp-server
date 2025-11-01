@@ -1,21 +1,21 @@
 # Push Chain MCP Server
 
-[![Node Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen)](https://nodejs.org/)
+Unified Model Context Protocol (MCP) server providing AI assistants with comprehensive access to Push Chain documentation and SDK (`@pushchain/core`, `@pushchain/ui-kit`).
 
-Model Context Protocol (MCP) server providing AI assistants with access to Push Chain documentation and SDK (`@pushchain/core`, `@pushchain/ui-kit`).
 
 ## What is This?
 
-This MCP server enables AI assistants (like Claude) to access and query Push Chain's documentation and SDK directly. It provides two main capabilities:
+This unified MCP server enables AI assistants (like Claude) to access and query both Push Chain's documentation and SDK in a single, streamlined interface. It combines:
 
-1. **Documentation Server**: Browse, search, and retrieve Push Chain documentation from GitHub
-2. **SDK Server**: Query functions, classes, types, and code examples from `@pushchain/core` and `@pushchain/ui-kit`
+1. **Documentation Access**: Browse, search, and retrieve Push Chain documentation from GitHub
+2. **SDK Analysis**: Query functions, classes, types, and code examples from `@pushchain/core` and `@pushchain/ui-kit`
 
 With this server, your AI assistant can help you:
 - Find relevant documentation instantly
 - Understand SDK APIs and their usage
 - Get TypeScript type definitions
 - Discover code examples and best practices
+- Access both docs and SDK through one unified interface
 
 ## Table of Contents
 
@@ -34,14 +34,16 @@ With this server, your AI assistant can help you:
 - [Troubleshooting](#troubleshooting)
 - [Project Structure](#project-structure)
 - [Development](#development)
-- [Contributing](#contributing)
 
 ## Features
 
+- **Unified Interface**: Single server combining both documentation and SDK access
 - **Documentation Access**: Browse and search all Push Chain `.mdx` documentation from GitHub
 - **SDK Analysis**: Query functions, classes, types, and interfaces from `@pushchain/core` and `@pushchain/ui-kit`
-- **Code Examples**: Find real usage examples and implementation patterns
+- **Code Examples**: Find real usage examples and implementation patterns from both docs and SDK
 - **Type Definitions**: Get complete TypeScript type information
+- **Auto-Update**: Automatically keeps SDK data fresh from GitHub
+- **13 Powerful Tools**: 4 documentation tools + 9 SDK tools in one server
 
 ## Prerequisites
 
@@ -55,25 +57,41 @@ Before you begin, ensure you have:
 
 ## Quick Start
 
-Get up and running in 3 steps:
+### Automated Setup (Recommended)
 
 ```bash
-# 1. Clone and install
+# 1. Clone and navigate
 git clone https://github.com/pushchain/push-chain-mcp-server.git
-cd push-chain-mcp-server
+cd push-chain-mcp-server/mcp-servers
+
+# 2. Run setup script
+chmod +x setup.sh
+./setup.sh
+```
+
+The setup script will:
+- ✅ Check Node.js version
+- ✅ Install dependencies
+- ✅ Create `.env` file
+- ✅ Show IDE configuration instructions
+
+### Manual Setup
+
+```bash
+# 1. Clone and navigate
+git clone https://github.com/pushchain/push-chain-mcp-server.git
+cd push-chain-mcp-server/mcp-servers
 
 # 2. Install dependencies
 npm install
 
-# 3. (Optional) Configure GitHub token for higher rate limits
+# 3. (Optional) Configure GitHub token
 cp .env.example .env
 # Edit .env and add your GITHUB_TOKEN
 
-# 4. Verify installation
-npm test
+# 4. Start
+npm start
 ```
-
-If all tests pass ✅, you're ready to configure in your IDE!
 
 ## Setup
 
@@ -93,13 +111,9 @@ If all tests pass ✅, you're ready to configure in your IDE!
    ```json
    {
      "mcpServers": {
-       "push-chain-docs": {
+       "push-chain": {
          "command": "node",
-         "args": ["/absolute/path/to/mcp-servers/index.js"]
-       },
-       "push-chain-sdk": {
-         "command": "node",
-         "args": ["/absolute/path/to/mcp-servers/index-sdk.js"]
+         "args": ["/absolute/path/to/mcp-servers/index-unified.js"]
        }
      }
    }
@@ -112,6 +126,8 @@ If all tests pass ✅, you're ready to configure in your IDE!
 
 5. **Verify:**
    Ask Claude: "List all Push Chain documentation" or "Show me the PushClient class"
+
+**Note**: The unified server provides access to both documentation and SDK through a single connection!
 
 ### Cursor
 
@@ -128,13 +144,9 @@ If all tests pass ✅, you're ready to configure in your IDE!
    ```json
    {
      "mcp.servers": {
-       "push-chain-docs": {
+       "push-chain": {
          "command": "node",
-         "args": ["/absolute/path/to/mcp-servers/index.js"]
-       },
-       "push-chain-sdk": {
-         "command": "node",
-         "args": ["/absolute/path/to/mcp-servers/index-sdk.js"]
+         "args": ["/absolute/path/to/mcp-servers/index-unified.js"]
        }
      }
    }
@@ -143,7 +155,7 @@ If all tests pass ✅, you're ready to configure in your IDE!
 4. **Restart Cursor**
 
 5. **Verify:**
-   In chat, ask: "Search Push Chain docs for wallet setup"
+   In chat, ask: "Search Push Chain docs for wallet setup" or "Show me PushClient methods"
 
 ### Windsurf
 
@@ -156,28 +168,23 @@ If all tests pass ✅, you're ready to configure in your IDE!
 2. **Open Windsurf Settings:**
    - Click Settings icon → "MCP Servers"
 
-3. **Add new servers:**
-
-   **Server 1:**
-   - Name: `push-chain-docs`
+3. **Add new server:**
+   - Name: `push-chain`
    - Command: `node`
-   - Args: `/absolute/path/to/mcp-servers/index.js`
+   - Args: `/absolute/path/to/mcp-servers/index-unified.js`
 
-   **Server 2:**
-   - Name: `push-chain-sdk`
-   - Command: `node`
-   - Args: `/absolute/path/to/mcp-servers/index-sdk.js`
-
-4. **Enable the servers** (toggle switch to ON)
+4. **Enable the server** (toggle switch to ON)
 
 5. **Restart Windsurf**
 
 6. **Verify:**
-   In Cascade, ask: "Get all exports from @pushchain/core"
+   In Cascade, ask: "List Push Chain docs" or "Get all exports from @pushchain/core"
 
 ## Available Tools
 
-### Documentation Server (4 tools)
+The unified server provides **13 powerful tools** organized into two categories:
+
+### Documentation Tools (4 tools)
 
 | Tool | Description |
 |------|-------------|
@@ -186,7 +193,7 @@ If all tests pass ✅, you're ready to configure in your IDE!
 | `search_push_chain_docs` | Search docs by keywords or topics |
 | `get_code_snippets` | Extract code examples from documentation |
 
-### SDK Server (9 tools)
+### SDK Tools (9 tools)
 
 | Tool | Description |
 |------|-------------|
@@ -199,6 +206,8 @@ If all tests pass ✅, you're ready to configure in your IDE!
 | `find_usage_examples` | Find real usage examples in codebase |
 | `get_core_classes` | Get all classes from @pushchain/core |
 | `get_ui_components` | Get React components and hooks from ui-kit |
+
+**All tools are accessible through a single server connection!**
 
 ## Example Queries
 
@@ -347,36 +356,56 @@ cat .sdk-update-metadata.json
 
 ```
 mcp-servers/
-├── index.js                   # Documentation server
-├── index-sdk.js               # SDK server (with auto-update)
+├── setup.sh                   # 🚀 Quick setup script
+├── index-unified.js           # ⭐ Main unified server
 ├── sdk-updater.js             # Auto-update system
+├── generate-sdk-data.js       # SDK data generator
+├── generate-docs-data.js      # Documentation data generator
 ├── package.json               # Dependencies
+├── .mcp.json                  # MCP server configuration
+│
+├── data/                      # Data files
+│   ├── docs_cache.json        # Cached documentation
+│   ├── sdk_complete_analysis.json
+│   ├── sdk_complete_exports.json
+│   ├── sdk_file_contents.json
+│   └── sdk_packages_complete.json
+│
 ├── schemas/                   # Input validation
 │   ├── docs-schemas.js
 │   └── sdk-schemas.js
-├── scripts/                   # Utility scripts
-│   └── analyze-sdk.js         # SDK analyzer
-├── utils/                     # Shared utilities
-│   ├── constants.js
-│   ├── response-formatter.js
-│   └── error-handler.js
-├── sdk_*.json                 # SDK data (auto-updated)
-└── .sdk-update-metadata.json  # Update tracking (gitignored)
+│
+├── scripts/                   # Utility & test scripts
+│   ├── analyze-sdk.js         # SDK analyzer
+│   ├── test-unified-server.js # Comprehensive tests
+│   ├── test-mcp-compliance.js # MCP compliance tests
+│   ├── test-docs-loading.js   # Documentation tests
+│   ├── test-connection.js     # Connection tests
+│   └── stress-test.js         # Performance tests
+│
+└── utils/                     # Shared utilities
+    ├── constants.js
+    ├── error-handler.js
+    ├── response-formatter.js
+    └── schema-converter.js
 ```
 
 ## Development
 
-**Run servers:**
+**Run server:**
 ```bash
-npm start          # Documentation server
-npm run start:sdk  # SDK server
+npm start                # Start the unified server
 ```
 
-**Update SDK data:**
+**Update data:**
 ```bash
+# SDK data updates
 npm run update:sdk        # Check for updates
 npm run update:sdk:force  # Force immediate update
 npm run analyze:sdk       # Analyze local SDK clone
+
+# Documentation updates
+npm run update:docs       # Fetch latest documentation from GitHub
 ```
 
 **Environment variables:**
@@ -387,24 +416,13 @@ SDK_UPDATE_INTERVAL=conservative    # Update frequency
 SDK_AUTO_UPDATE=true                # Enable auto-updates
 ```
 
-Servers use stdio transport - test via MCP client or configured IDE.
-
-## Contributing
-
-We welcome contributions!
-
-### Ways to Contribute
-
-- Report bugs and request features via [GitHub Issues](https://github.com/pushchain/push-chain-mcp-server/issues)
-- Submit pull requests for bug fixes or new features
-- Improve documentation
-- Share feedback and usage examples
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+**Architecture:**
+- `index-unified.js` - Main unified server (all features)
+- Uses stdio transport for MCP communication
 
 ## Support
 
-- **Documentation**: See this README and [CONTRIBUTING.md](CONTRIBUTING.md)
+- **Documentation**: See this README
 - **Issues**: [GitHub Issues](https://github.com/pushchain/push-chain-mcp-server/issues)
 
 ## Acknowledgments

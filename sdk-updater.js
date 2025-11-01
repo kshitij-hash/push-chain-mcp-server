@@ -19,7 +19,7 @@ const __dirname = dirname(__filename);
 
 // Configuration
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN || "";
-const GITHUB_REPO = "pushchain/push-chain-dev";
+const GITHUB_REPO = "pushchain/push-chain-sdk";
 const GITHUB_BRANCH = "main";
 const SDK_PACKAGES = ["packages/core", "packages/ui-kit"];
 const UPDATE_METADATA_FILE = resolve(__dirname, ".sdk-update-metadata.json");
@@ -184,9 +184,10 @@ async function updateSDKData() {
     // Run SDK analysis script (you'll need to create this based on your existing analysis logic)
     // For now, we'll assume you have a script that generates the JSON files
     const analyzeScript = resolve(__dirname, "scripts", "analyze-sdk.js");
+    const dataDir = resolve(__dirname, "data");
 
     if (existsSync(analyzeScript)) {
-      execSync(`node "${analyzeScript}" "${tmpDir}"`, { stdio: 'inherit' });
+      execSync(`node "${analyzeScript}" "${tmpDir}" "${dataDir}"`, { stdio: 'inherit' });
     } else {
       console.warn("⚠️  SDK analysis script not found. Please create scripts/analyze-sdk.js");
       console.log("   For now, manually regenerate SDK JSON files from the cloned repo at:");
