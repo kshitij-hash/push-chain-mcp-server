@@ -99,7 +99,7 @@ cd push-chain-mcp-server
 pwd  # Copy this path
 
 # Add server using CLI
-claude mcp add --transport stdio push-chain -- node /absolute/path/to/index-unified.js
+claude mcp add push-chain -- node /absolute/path/to/index-unified.js
 ```
 
 **Project Configuration:** Create `.mcp.json` in your project root for team sharing:
@@ -116,11 +116,7 @@ claude mcp add --transport stdio push-chain -- node /absolute/path/to/index-unif
 }
 ```
 
-**Manual Configuration:** Edit config file at:
-- **macOS/Linux**: `~/Library/Application Support/Claude/claude_desktop_config.json`
-- **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
-
-Use the same JSON structure as above.
+**Note:** Claude Code stores MCP server configuration internally. For advanced manual configuration or project-specific settings, use the `.mcp.json` approach shown above.
 
 #### Restart Claude Code
 
@@ -151,7 +147,6 @@ cat > .cursor/mcp.json << 'EOF'
 {
   "mcpServers": {
     "push-chain": {
-      "type": "stdio",
       "command": "node",
       "args": ["/absolute/path/to/index-unified.js"],
       "env": {"GITHUB_TOKEN": "${env:GITHUB_TOKEN}"}

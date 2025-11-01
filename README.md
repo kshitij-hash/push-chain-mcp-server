@@ -45,7 +45,7 @@ With this server, your AI assistant can help you:
 ```bash
 # 1. Clone the repository
 git clone https://github.com/kshitij-hash/push-chain-mcp-server.git
-cd push-chain-mcp-server/mcp-servers
+cd push-chain-mcp-server
 
 # 2. Run the setup script
 chmod +x setup.sh

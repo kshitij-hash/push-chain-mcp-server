@@ -93,10 +93,7 @@ echo -e "${GREEN}╚════════════════════
 
 echo -e "${BLUE}Next steps:${NC}\n"
 
-echo -e "1️⃣  ${YELLOW}Start the server:${NC}"
-echo -e "   npm start\n"
-
-echo -e "2️⃣  ${YELLOW}Configure your IDE:${NC}"
+echo -e "1️⃣  ${YELLOW}Configure your IDE:${NC}"
 echo -e "   ${GREEN}Claude Desktop:${NC}"
 echo -e "   Add to ~/Library/Application Support/Claude/claude_desktop_config.json:\n"
 echo -e '   {
@@ -114,7 +111,6 @@ echo -e "   Create .cursor/mcp.json in your project:\n"
 echo -e '   {
      "mcpServers": {
        "push-chain": {
-         "type": "stdio",
          "command": "node",
          "args": ["'$(pwd)'/index-unified.js"]
        }
@@ -122,7 +118,8 @@ echo -e '   {
    }'
 echo ""
 
-echo -e "3️⃣  ${YELLOW}Test it:${NC}"
+echo -e "2️⃣  ${YELLOW}Restart your IDE and test:${NC}"
+echo -e "   The MCP server will start automatically!"
 echo -e "   Ask your AI: ${GREEN}\"List all Push Chain documentation\"${NC}\n"
 
 echo -e "${BLUE}Optional:${NC}"
