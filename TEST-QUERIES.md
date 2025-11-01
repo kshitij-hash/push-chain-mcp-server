@@ -377,60 +377,15 @@ Use these queries with Claude, ChatGPT, or any LLM agent that has access to your
 
 ---
 
-## ✅ Expected Behaviors
-
-### What to Verify:
-
-For each query, check that:
-
-1. **Response Time** - Should be fast (most < 200ms)
-2. **Completeness** - Answers the question fully
-3. **Accuracy** - Information is correct
-4. **Format** - Clean, readable markdown or JSON
-5. **Error Handling** - Invalid queries get helpful error messages
-6. **Pagination** - Large results show pagination info
-7. **No Crashes** - Server never crashes or hangs
-8. **Character Limits** - Very long responses are truncated gracefully
-
----
-
-## 🎯 Success Criteria
+## ✅ Success Criteria
 
 Your MCP server is working correctly if:
-
-- ✅ All queries return results (or proper errors)
-- ✅ Response times are fast
-- ✅ Documentation search is accurate
-- ✅ SDK search finds relevant code
-- ✅ Code examples are properly formatted
-- ✅ Error messages are helpful
-- ✅ Pagination works for large results
-- ✅ No server crashes or hangs
-- ✅ Results are relevant to the query
-- ✅ LLM can effectively use the information
-
----
-
-## 📝 Testing Checklist
-
-Use this checklist as you test:
-
-- [ ] Basic documentation listing works
-- [ ] Documentation search finds relevant files
-- [ ] Code snippet extraction works
-- [ ] SDK API lookup works
-- [ ] SDK search finds functions/classes
-- [ ] Package info is accurate
-- [ ] Type definitions are complete
-- [ ] Source code viewing works
-- [ ] Usage examples are found
-- [ ] Core classes listed correctly
-- [ ] UI components listed correctly
-- [ ] Multi-step queries work well
-- [ ] Invalid queries handled gracefully
-- [ ] Pagination shows for large results
-- [ ] Performance is good (< 1 second for most queries)
-- [ ] LLM understands and uses the responses effectively
+- All queries return results or proper errors
+- Response times are fast (most < 200ms)
+- Documentation and SDK search are accurate
+- Error messages are helpful
+- No server crashes or hangs
+- LLM can effectively use the information
 
 ---
 
@@ -472,20 +427,7 @@ Use this checklist as you test:
 
 ---
 
-## 🎓 Tips for Testing
-
-1. **Start Simple** - Begin with basic queries to verify core functionality
-2. **Increase Complexity** - Move to multi-step and complex queries
-3. **Test Errors** - Try invalid inputs to verify error handling
-4. **Mix Formats** - Request both JSON and markdown responses
-5. **Performance Check** - Note which queries are slow
-6. **LLM Understanding** - Verify the LLM can use the information effectively
-7. **Real Scenarios** - Test actual developer workflows
-8. **Edge Cases** - Try unusual or boundary inputs
-
----
-
-## 📊 Sample Test Session
+## 📊 Sample Test Sessions
 
 Here's a complete test session you can run:
 

@@ -21,19 +21,14 @@ With this server, your AI assistant can help you:
 
 - [What is This?](#what-is-this)
 - [Features](#features)
-- [Prerequisites](#prerequisites)
 - [Quick Start](#quick-start)
 - [Setup](#setup)
-  - [Claude Code](#claude-code)
-  - [Cursor](#cursor)
-  - [Windsurf](#windsurf)
 - [Available Tools](#available-tools)
 - [Example Queries](#example-queries)
 - [SDK Auto-Update](#sdk-auto-update)
-- [GitHub Token Configuration](#github-token-recommended)
-- [Troubleshooting](#troubleshooting)
 - [Project Structure](#project-structure)
 - [Development](#development)
+- [Support](#support)
 
 ## Features
 
@@ -45,385 +40,94 @@ With this server, your AI assistant can help you:
 - **Auto-Update**: Automatically keeps SDK data fresh from GitHub
 - **13 Powerful Tools**: 4 documentation tools + 9 SDK tools in one server
 
-## Prerequisites
-
-Before you begin, ensure you have:
-
-- **Node.js 18 or higher** - [Download here](https://nodejs.org/)
-- **npm** or **yarn** package manager
-- **GitHub Personal Access Token** (optional but recommended for higher API rate limits)
-  - Generate at: https://github.com/settings/tokens
-  - No special permissions needed - public repo access only
-
 ## Quick Start
 
-### Automated Setup (Recommended)
-
 ```bash
-# 1. Clone and navigate
-git clone https://github.com/pushchain/push-chain-mcp-server.git
+# 1. Clone the repository
+git clone https://github.com/kshitij-hash/push-chain-mcp-server.git
 cd push-chain-mcp-server/mcp-servers
 
-# 2. Run setup script
+# 2. Run the setup script
 chmod +x setup.sh
 ./setup.sh
-```
 
-The setup script will:
-- ✅ Check Node.js version
-- ✅ Install dependencies
-- ✅ Create `.env` file
-- ✅ Show IDE configuration instructions
-
-### Manual Setup
-
-```bash
-# 1. Clone and navigate
-git clone https://github.com/pushchain/push-chain-mcp-server.git
-cd push-chain-mcp-server/mcp-servers
-
-# 2. Install dependencies
-npm install
-
-# 3. (Optional) Configure GitHub token
-cp .env.example .env
-# Edit .env and add your GITHUB_TOKEN
-
-# 4. Start
-npm start
+# 3. Follow the IDE-specific instructions in SETUP.md
 ```
 
 ## Setup
 
-### Claude Code
+**For detailed setup instructions for your IDE, see [SETUP.md](./SETUP.md)**
 
-1. **Find your config file location:**
-   - macOS/Linux: `~/Library/Application Support/Claude/claude_desktop_config.json`
-   - Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+The setup guide includes:
+- ✅ Prerequisites and installation steps
+- ✅ IDE-specific configuration for Claude Code, Cursor, and Windsurf
+- ✅ GitHub token configuration (optional)
+- ✅ Verification steps
+- ✅ Example queries to get started
+- ✅ Comprehensive troubleshooting guide
 
-2. **Get the absolute path to this project:**
-   ```bash
-   cd mcp-servers
-   pwd  # Copy this path
-   ```
-
-3. **Edit your Claude config file** and add:
-   ```json
-   {
-     "mcpServers": {
-       "push-chain": {
-         "command": "node",
-         "args": ["/absolute/path/to/mcp-servers/index-unified.js"]
-       }
-     }
-   }
-   ```
-   Replace `/absolute/path/to/mcp-servers/` with your actual path from step 2.
-
-4. **Restart Claude Code:**
-   - macOS: `Cmd+Q` then reopen
-   - Windows: Close from system tray, then restart
-
-5. **Verify:**
-   Ask Claude: "List all Push Chain documentation" or "Show me the PushClient class"
-
-**Note**: The unified server provides access to both documentation and SDK through a single connection!
-
-### Cursor
-
-1. **Get the absolute path:**
-   ```bash
-   cd mcp-servers
-   pwd
-   ```
-
-2. **Open Cursor Settings:**
-   - `Cmd/Ctrl + Shift + P` → "Preferences: Open User Settings (JSON)"
-
-3. **Add MCP configuration:**
-   ```json
-   {
-     "mcp.servers": {
-       "push-chain": {
-         "command": "node",
-         "args": ["/absolute/path/to/mcp-servers/index-unified.js"]
-       }
-     }
-   }
-   ```
-
-4. **Restart Cursor**
-
-5. **Verify:**
-   In chat, ask: "Search Push Chain docs for wallet setup" or "Show me PushClient methods"
-
-### Windsurf
-
-1. **Get the absolute path:**
-   ```bash
-   cd mcp-servers
-   pwd
-   ```
-
-2. **Open Windsurf Settings:**
-   - Click Settings icon → "MCP Servers"
-
-3. **Add new server:**
-   - Name: `push-chain`
-   - Command: `node`
-   - Args: `/absolute/path/to/mcp-servers/index-unified.js`
-
-4. **Enable the server** (toggle switch to ON)
-
-5. **Restart Windsurf**
-
-6. **Verify:**
-   In Cascade, ask: "List Push Chain docs" or "Get all exports from @pushchain/core"
+**Quick Links:**
+- [Claude Code Setup](./SETUP.md#claude-code)
+- [Cursor Setup](./SETUP.md#cursor)
+- [Windsurf Setup](./SETUP.md#windsurf)
+- [Example Queries](./SETUP.md#example-queries)
+- [Troubleshooting](./SETUP.md#troubleshooting)
 
 ## Available Tools
 
-The unified server provides **13 powerful tools** organized into two categories:
+The unified server provides **13 powerful tools**:
+- **4 Documentation tools**: List, search, read docs, and extract code snippets
+- **9 SDK tools**: Query APIs, search code, get types, find examples, and more
 
-### Documentation Tools (4 tools)
-
-| Tool | Description |
-|------|-------------|
-| `list_push_chain_docs` | List all documentation files with category filtering |
-| `get_push_chain_doc` | Get full content of a specific doc file |
-| `search_push_chain_docs` | Search docs by keywords or topics |
-| `get_code_snippets` | Extract code examples from documentation |
-
-### SDK Tools (9 tools)
-
-| Tool | Description |
-|------|-------------|
-| `get_sdk_api` | Get API details for functions, classes, types |
-| `search_sdk` | Search across all SDK code and types |
-| `get_package_info` | Get package metadata and statistics |
-| `get_type_definition` | Get TypeScript type definitions |
-| `get_source_file` | Read complete source code of any file |
-| `list_all_exports` | List all exported APIs by type |
-| `find_usage_examples` | Find real usage examples in codebase |
-| `get_core_classes` | Get all classes from @pushchain/core |
-| `get_ui_components` | Get React components and hooks from ui-kit |
-
-**All tools are accessible through a single server connection!**
+**All tools are accessible through a single server connection!** See [SETUP.md](./SETUP.md#understanding-available-tools) for complete tool descriptions.
 
 ## Example Queries
 
-Once configured in your IDE, try asking your AI assistant these questions:
+Once configured, try these queries to get started:
 
-### Documentation Queries
-
+**Documentation:**
 ```
 "List all Push Chain tutorials"
 "Show me the wallet setup guide"
 "Search documentation for transaction examples"
-"Get the intro to Push Chain documentation"
-"Find all UI Kit documentation"
-"What code examples are in the wallet docs?"
 ```
 
-### SDK Queries
-
+**SDK:**
 ```
 "What methods does PushClient have?"
 "Show me the UniversalAccount type definition"
-"Find usage examples of createUniversalSigner"
 "List all React hooks in ui-kit"
-"Get the PushClient class details"
-"What functions are exported from @pushchain/core?"
-"Search for wallet-related APIs"
-"Show me all UI components in ui-kit"
 ```
 
-### Combined Queries (Most Powerful!)
-
+**Combined:**
 ```
-"How do I create a transaction using PushClient? Show me the type definitions and code examples from the docs"
-"What's the difference between UniversalSigner and UniversalAccount? Include examples"
-"I want to build a wallet - show me relevant docs and the SDK APIs I'll need"
-"Find all authentication-related documentation and SDK functions"
+"I want to build a wallet - show me relevant docs and SDK APIs"
+"How do I implement transaction signing? Show types, functions, and examples"
 ```
 
-## SDK Auto-Update
+**For 50+ comprehensive test queries, see [TEST-QUERIES.md](./TEST-QUERIES.md)**
 
-The SDK server automatically checks for updates from the Push Chain repository and refreshes data when changes are detected.
-
-### How It Works
-
-1. **Smart Change Detection**: Checks GitHub commit SHA before updating
-2. **Package-Specific Tracking**: Only updates when `@pushchain/core` or `@pushchain/ui-kit` change
-3. **Configurable Intervals**: Default 24-hour check interval (customizable)
-4. **Non-Blocking**: Updates happen in background, server remains responsive
-
-### Configuration
-
-Add to your `.env` file:
-
-```bash
-# GitHub token (recommended for higher rate limits)
-GITHUB_TOKEN=your_github_personal_access_token
-
-# Update check interval (optional)
-# Options: aggressive (1h), moderate (6h), conservative (24h - default), weekly (7d)
-SDK_UPDATE_INTERVAL=conservative
-
-# Disable auto-updates (optional)
-SDK_AUTO_UPDATE=false
-```
-
-### Manual Update Commands
-
-```bash
-# Check for updates (respects interval)
-npm run update:sdk
-
-# Force update immediately
-npm run update:sdk:force
-
-# Regenerate SDK data from existing clone
-npm run analyze:sdk
-```
-
-### Update Intervals
-
-| Interval | Check Frequency | Best For |
-|----------|----------------|----------|
-| `aggressive` | Every hour | Active development |
-| `moderate` | Every 6 hours | Testing environments |
-| `conservative` | Every 24 hours | Production (default) |
-| `weekly` | Every 7 days | Stable deployments |
-
-## GitHub Token (Recommended)
-
-For higher API rate limits (5000/hour vs 60/hour) and auto-updates:
-
-1. Create `.env` file in `mcp-servers/`:
-   ```bash
-   GITHUB_TOKEN=your_github_personal_access_token
-   SDK_UPDATE_INTERVAL=conservative
-   ```
-
-2. Generate token at: https://github.com/settings/tokens
-   - No special permissions needed (public repo access only)
-
-## Troubleshooting
-
-### Server not responding
-
-1. Check absolute paths are correct in your config
-2. Ensure Node.js is in your PATH: `node --version`
-3. Verify installation: `cd mcp-servers && npm install`
-
-### "Module not found" errors
-
-```bash
-cd mcp-servers
-rm -rf node_modules package-lock.json
-npm install
-```
-
-### Rate limiting
-
-If you see "GitHub API rate limit exceeded":
-- Add a GitHub token (see SDK Auto-Update section)
-- Wait ~1 hour for rate limit reset
-- Temporarily disable auto-updates: `SDK_AUTO_UPDATE=false`
-
-### SDK data outdated
-
-If the AI provides outdated SDK information:
-
-```bash
-# Force update SDK data
-npm run update:sdk:force
-
-# Check when last updated
-cat .sdk-update-metadata.json
-```
-
-### Config file location issues
-
-**Claude Code:**
-- Create config directory if missing: `mkdir -p ~/Library/Application\ Support/Claude`
-- Create empty config: `echo '{"mcpServers":{}}' > ~/Library/Application\ Support/Claude/claude_desktop_config.json`
-
-**Cursor/Windsurf:**
-- Check IDE-specific documentation for MCP server configuration location
-
-## Project Structure
-
-```
-mcp-servers/
-├── setup.sh                   # 🚀 Quick setup script
-├── index-unified.js           # ⭐ Main unified server
-├── sdk-updater.js             # Auto-update system
-├── generate-sdk-data.js       # SDK data generator
-├── generate-docs-data.js      # Documentation data generator
-├── package.json               # Dependencies
-├── .mcp.json                  # MCP server configuration
-│
-├── data/                      # Data files
-│   ├── docs_cache.json        # Cached documentation
-│   ├── sdk_complete_analysis.json
-│   ├── sdk_complete_exports.json
-│   ├── sdk_file_contents.json
-│   └── sdk_packages_complete.json
-│
-├── schemas/                   # Input validation
-│   ├── docs-schemas.js
-│   └── sdk-schemas.js
-│
-├── scripts/                   # Utility & test scripts
-│   ├── analyze-sdk.js         # SDK analyzer
-│   ├── test-unified-server.js # Comprehensive tests
-│   ├── test-mcp-compliance.js # MCP compliance tests
-│   ├── test-docs-loading.js   # Documentation tests
-│   ├── test-connection.js     # Connection tests
-│   └── stress-test.js         # Performance tests
-│
-└── utils/                     # Shared utilities
-    ├── constants.js
-    ├── error-handler.js
-    ├── response-formatter.js
-    └── schema-converter.js
-```
+**For detailed example queries and getting started guide, see [SETUP.md](./SETUP.md#example-queries)**
 
 ## Development
 
-**Run server:**
 ```bash
-npm start                # Start the unified server
+# Start server
+npm start
+
+# Update data
+npm run update:sdk        # Check for SDK updates
+npm run update:docs       # Fetch latest documentation
 ```
 
-**Update data:**
-```bash
-# SDK data updates
-npm run update:sdk        # Check for updates
-npm run update:sdk:force  # Force immediate update
-npm run analyze:sdk       # Analyze local SDK clone
-
-# Documentation updates
-npm run update:docs       # Fetch latest documentation from GitHub
-```
-
-**Environment variables:**
-```bash
-# .env file
-GITHUB_TOKEN=ghp_xxxxx              # GitHub PAT (recommended)
-SDK_UPDATE_INTERVAL=conservative    # Update frequency
-SDK_AUTO_UPDATE=true                # Enable auto-updates
-```
-
-**Architecture:**
-- `index-unified.js` - Main unified server (all features)
-- Uses stdio transport for MCP communication
+**Configuration:** Create a `.env` file for GitHub token and auto-update settings. See [SETUP.md](./SETUP.md#github-token-configuration-optional) for details.
 
 ## Support
 
-- **Documentation**: See this README
-- **Issues**: [GitHub Issues](https://github.com/pushchain/push-chain-mcp-server/issues)
+- **Setup Guide**: [SETUP.md](./SETUP.md) - Detailed setup instructions for all IDEs
+- **Test Queries**: [TEST-QUERIES.md](./TEST-QUERIES.md) - 50+ comprehensive test queries
+- **Documentation**: See this README for project overview
+- **Issues**: [GitHub Issues](https://github.com/kshitij-hash/push-chain-mcp-server/issues)
 
 ## Acknowledgments
 

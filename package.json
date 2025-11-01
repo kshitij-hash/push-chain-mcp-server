@@ -28,12 +28,12 @@
   "author": "Push Chain",
   "repository": {
     "type": "git",
-    "url": "https://github.com/pushchain/push-chain-mcp-server.git"
+    "url": "https://github.com/kshitij-hash/push-chain-mcp-server.git"
   },
   "bugs": {
-    "url": "https://github.com/pushchain/push-chain-mcp-server/issues"
+    "url": "https://github.com/kshitij-hash/push-chain-mcp-server/issues"
   },
-  "homepage": "https://github.com/pushchain/push-chain-mcp-server#readme",
+  "homepage": "https://github.com/kshitij-hash/push-chain-mcp-server#readme",
   "engines": {
     "node": ">=18.0.0"
   },
