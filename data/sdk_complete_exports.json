@@ -133,6 +133,18 @@
       "file": "packages/core/src/lib/internal/buffer.ts"
     },
     {
+      "name": "buildExecuteMulticall",
+      "file": "packages/core/src/lib/orchestrator/payload-builders.ts"
+    },
+    {
+      "name": "COUNTER_ABI_PAYABLE",
+      "file": "packages/core/src/lib/push-chain/helpers/abis.ts"
+    },
+    {
+      "name": "COUNTER_ADDRESS_PAYABLE",
+      "file": "packages/core/src/lib/push-chain/helpers/addresses.ts"
+    },
+    {
       "name": "toUniversal",
       "file": "packages/core/src/lib/universal/account/account.ts"
     },
@@ -321,7 +333,7 @@
       "file": "packages/core/src/lib/orchestrator/orchestrator.types.ts"
     },
     {
-      "name": "MulticallCall",
+      "name": "MultiCall",
       "file": "packages/core/src/lib/orchestrator/orchestrator.types.ts"
     },
     {

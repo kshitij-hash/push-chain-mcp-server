@@ -1,21 +1,21 @@
 {
-  "generatedAt": "2025-10-31T19:24:33.182Z",
+  "generatedAt": "2025-11-11T23:19:06.848Z",
   "packages": [
     {
       "name": "@pushchain/core",
-      "version": "2.1.6",
+      "version": "3.0.5",
       "path": "packages/core"
     },
     {
       "name": "@pushchain/ui-kit",
-      "version": "2.0.15",
+      "version": "2.1.0",
       "path": "packages/ui-kit"
     }
   ],
   "statistics": {
-    "totalFiles": 101,
-    "totalExports": 137,
-    "functions": 57,
+    "totalFiles": 104,
+    "totalExports": 140,
+    "functions": 60,
     "classes": 15,
     "types": 32,
     "interfaces": 33

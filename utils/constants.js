@@ -20,7 +20,7 @@ export const CACHE_TTL = 1000 * 60 * 30;
 export const GITHUB_CONFIG = {
   owner: "pushchain",
   repo: "push-chain-website",
-  branch: "1059-documentation-push-wallet",
+  branch: "main",
   basePath: "docs/chain",
   apiBase: "https://api.github.com",
   rawBase: "https://raw.githubusercontent.com"
