@@ -49,7 +49,7 @@ export const SearchDocsInputSchema = z.object({
     .min(2, "Query must be at least 2 characters")
     .max(200, "Query must not exceed 200 characters")
     .describe("Search query to match against file names, paths, and content (e.g., 'wallet setup', 'smart contract', 'ERC-20')"),
-  limit: z.number()
+  limit: z.coerce.number()
     .int()
     .min(1, "Limit must be at least 1")
     .max(50, "Limit cannot exceed 50")
@@ -75,7 +75,7 @@ export const GetCodeSnippetsInputSchema = z.object({
     .regex(/^[a-z0-9]+$/i, "Language must contain only alphanumeric characters")
     .optional()
     .describe("Optional: filter by programming language (e.g., 'javascript', 'typescript', 'solidity', 'bash')"),
-  limit: z.number()
+  limit: z.coerce.number()
     .int()
     .min(1, "Limit must be at least 1")
     .max(100, "Limit cannot exceed 100")

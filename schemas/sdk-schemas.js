@@ -41,13 +41,13 @@ export const SearchSdkInputSchema = z.object({
   scope: z.enum(["all", "exports", "code", "types"])
     .default("all")
     .describe("Search scope: 'all' for everything, 'exports' for exported APIs only, 'code' for file content, 'types' for type definitions"),
-  limit: z.number()
+  limit: z.coerce.number()
     .int()
     .min(1, "Limit must be at least 1")
     .max(100, "Limit cannot exceed 100")
     .default(20)
     .describe("Maximum number of results to return per category (default: 20)"),
-  offset: z.number()
+  offset: z.coerce.number()
     .int()
     .min(0, "Offset cannot be negative")
     .default(0)
@@ -107,7 +107,7 @@ export const FindUsageExamplesInputSchema = z.object({
     .min(1, "API name is required")
     .max(200, "API name must not exceed 200 characters")
     .describe("API name to find usage examples for (e.g., 'PushClient', 'createUniversalSigner')"),
-  limit: z.number()
+  limit: z.coerce.number()
     .int()
     .min(1, "Limit must be at least 1")
     .max(50, "Limit cannot exceed 50")
